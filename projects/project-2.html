@@ -852,7 +852,6 @@
                 <div
                   id="personasCarousel"
                   class="carousel slide position-relative"
-                  data-bs-ride="carousel"
                 >
                   <div class="carousel-inner rounded overflow-hidden">
                     <!-- Slide 1 -->
@@ -1260,66 +1259,67 @@
           "slid.bs.carousel",
           updatePersonaButtons
         );
-        setTimeout(updatePersonaButtons, 50);
+        personasCarousel.addEventListener(
+          "slid.bs.carousel",
+          updatePersonaButtons
+        );
+
+        // Wait until the first slide is actually activated by Bootstrap
+        personasCarousel.addEventListener(
+          "shown.bs.carousel",
+          updatePersonaButtons
+        );
       });
     </script>
     <script>
-      // ✅ Custom Horizontal Card Track Carousel
       document.addEventListener("DOMContentLoaded", () => {
-        const track = document.getElementById("carousel-track");
-        if (!track) return;
+        const personasCarousel = document.getElementById("personasCarousel");
+        const prevPersonaBtn = personasCarousel.querySelector(
+          ".carousel-control-prev-persona"
+        );
+        const nextPersonaBtn = personasCarousel.querySelector(
+          ".carousel-control-next-persona"
+        );
+        const personaItems =
+          personasCarousel.querySelectorAll(".carousel-item");
 
-        const cards = track.querySelectorAll(".carousel-card");
-        const prevCardBtn = document.querySelector(".card-prev");
-        const nextCardBtn = document.querySelector(".card-next");
-
-        let currentIndex = 0;
-
-        function getCardWidth() {
-          const card = cards[0];
-          const style = getComputedStyle(card);
-          const marginRight = parseFloat(style.marginRight);
-          const marginLeft = parseFloat(style.marginLeft);
-          return card.offsetWidth + marginLeft + marginRight;
-        }
-
-        function scrollToIndex() {
-          const scrollAmount = getCardWidth() * currentIndex;
-          const maxScroll = track.scrollWidth - track.clientWidth;
-          const target = Math.min(scrollAmount, maxScroll);
-
-          track.scrollTo({
-            left: target,
-            behavior: "smooth",
-          });
-
-          updateCardButtons();
-        }
-
-        function updateCardButtons() {
-          prevCardBtn.style.display = currentIndex === 0 ? "none" : "flex";
-          nextCardBtn.style.display =
-            currentIndex >= cards.length - 1 ? "none" : "flex";
-        }
-
-        nextCardBtn.addEventListener("click", () => {
-          if (currentIndex < cards.length - 1) {
-            currentIndex++;
-            scrollToIndex();
-          }
+        const myPersonasCarousel = new bootstrap.Carousel(personasCarousel, {
+          wrap: false,
         });
 
-        prevCardBtn.addEventListener("click", () => {
-          if (currentIndex > 0) {
-            currentIndex--;
-            scrollToIndex();
-          }
+        function getActiveIndex() {
+          const activeItem = personasCarousel.querySelector(
+            ".carousel-item.active"
+          );
+          return [...personaItems].indexOf(activeItem);
+        }
+
+        function updatePersonaButtons() {
+          const index = getActiveIndex();
+          prevPersonaBtn.style.display = index <= 0 ? "none" : "flex";
+          nextPersonaBtn.style.display =
+            index >= personaItems.length - 1 ? "none" : "flex";
+        }
+
+        prevPersonaBtn.addEventListener("click", () => {
+          myPersonasCarousel.prev();
         });
 
-        window.addEventListener("resize", scrollToIndex);
-        scrollToIndex();
+        nextPersonaBtn.addEventListener("click", () => {
+          myPersonasCarousel.next();
+        });
+
+        // Update buttons after sliding
+        personasCarousel.addEventListener(
+          "slid.bs.carousel",
+          updatePersonaButtons
+        );
+
+        // ✅ Ensure correct visibility at load
+        updatePersonaButtons();
       });
     </script>
+
     <!-- ✅ Intersection Observer Fade Up -->
     <script>
       const scrollSections = document.querySelectorAll(".fade-up");
