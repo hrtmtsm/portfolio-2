@@ -203,7 +203,7 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 2rem;
+  padding: 1.6rem 4rem;
   background: transparent;
   color: #141414; /* fine as fallback */
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -240,44 +240,7 @@ a:hover {
   opacity: 0.75;
 }
 
-/* Hero Section */
-.hero {
-  height: 100vh;
-  /* background-image: url('hero-bg.jpg'); */
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.hero-content {
-  /* z-index: 2; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
-
-
-.hero .subheading {
-  display: block;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 14px;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
-.hero h1 {
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-.hero .description {
-  font-size: 16px;
-  line-height: 1.6;
-}
 .scroll-down {
   position: absolute;
   bottom: 40px;
@@ -461,11 +424,10 @@ body {
 }
 
 
-
 .content-wrapper {
   margin-top: 96px;
-  padding-left: 160px;
-  padding-right: 160px;
+  padding-left: 144px;
+  padding-right: 144px;
 }
 
 /* Adjust padding for smaller screens */
