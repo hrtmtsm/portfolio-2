@@ -30,6 +30,10 @@
     />
     <meta name="apple-mobile-web-app-title" content="MyWebSite" />
     <link rel="manifest" href="images/favicon/web-app-manifest-192x192.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="css/main.css" />
     <style>
@@ -45,13 +49,22 @@
 
       /*───── Hero Section ─────*/
       #hero-bg {
-        min-height: 100vh;
+        height: 80vh;
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
         text-align: center;
+        overflow: visible; /* key */
       }
+
+      #runbuddy {
+        margin-top: -184px;
+        padding-top: 128px;
+        z-index: 1;
+        position: relative;
+      }
+
       .hero-content {
         position: relative;
         display: flex;
@@ -59,6 +72,7 @@
         align-items: center;
         justify-content: center;
       }
+
       #heroCard {
         position: absolute;
         background: #fff;
@@ -144,8 +158,9 @@
         align-items: center;
         justify-content: center;
       }
+
       .project-wrapper {
-        max-width: 1200px;
+        max-width: 1040px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -236,6 +251,66 @@
       .btn-case:hover::after {
         transform: translate(3px, -3px);
       }
+      .cursor-type-mode {
+        width: 2px;
+        height: 40px;
+        background-color: #232323;
+        opacity: 0.88;
+        border-radius: 1px;
+        animation: blink-caret 1s step-end infinite;
+      }
+
+      .cursor-type-mode .cursor-label {
+        display: none;
+      }
+
+      /* Optional blinking animation */
+      @keyframes blink-caret {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+      @media (max-width: 576px) {
+        #hero-bg {
+          height: auto !important;
+          padding-top: 3rem;
+          padding-bottom: 2rem;
+        }
+
+        #heroCard {
+          position: relative !important;
+          width: 80vw !important;
+          height: auto !important;
+          padding: 2rem 1.25rem !important;
+          left: auto !important;
+          top: auto !important;
+          transform: none !important;
+          margin: 0 auto;
+        }
+
+        .haruto-tag {
+          display: none !important;
+        }
+
+        #runbuddy {
+          margin-top: 2rem !important;
+          padding-top: 0 !important;
+        }
+
+        .corner {
+          display: block !important;
+          opacity: 1 !important;
+          width: 10px;
+          height: 10px;
+          background: #fff;
+          border: 2px solid var(--accent);
+          z-index: 10;
+        }
+      }
     </style>
   </head>
   <body>
@@ -283,7 +358,7 @@
     </section>
 
     <!--──────── PROJECT 2 ─────-->
-    <section id="runbuddy" class="project-slide fade-up">
+    <section id="runbuddy" class="project-slide">
       <div class="project-wrapper">
         <div class="project-info">
           <p class="project-label">Runbuddy</p>
@@ -418,9 +493,12 @@
 
     <!--──────── SCRIPTS ───────-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        /* ─── cursor ─── */
+        // ─── Cursor ───
         const cursor = document.getElementById("cursor");
         document.addEventListener("mousemove", (e) => {
           cursor.style.top = e.clientY + "px";
@@ -435,23 +513,34 @@
           );
         });
 
-        /* ─── element refs ─── */
+        // ─── Element Refs ───
         const heroCard = document.getElementById("heroCard");
         const sizeLabel = document.getElementById("sizeLabel");
         const dragTag = document.querySelector(".haruto-tag");
         const container = document.querySelector(".hero-content");
+        const cursorLabel = cursor.querySelector(".cursor-label");
+
+        container.addEventListener("mouseenter", () => {
+          cursor.classList.add("cursor-type-mode");
+          cursorLabel.textContent = "✍"; // or "Type", or any icon/text you want
+        });
+
+        container.addEventListener("mouseleave", () => {
+          cursor.classList.remove("cursor-type-mode");
+          cursorLabel.textContent = "↗"; // reset to default
+        });
+
         const nav = document.getElementById("mainNav");
         const sections = document.querySelectorAll("section");
         const [tl, tr, bl, br] = document.querySelectorAll(".corner");
 
-        /* ─── geometry helper ─── */
+        // ─── Geometry ───
         function updateCorners() {
           const rect = heroCard.getBoundingClientRect();
           const cont = container.getBoundingClientRect();
-
-          const square = tl.offsetWidth || 10; // .corner size
-          const border = 2; // border thickness
-          const offset = square / 2; // centre of square
+          const square = tl.offsetWidth || 10;
+          const border = 2;
+          const offset = square / 2;
           const visible = rect.width > 20 && rect.height > 20;
 
           [tl, tr, bl, br].forEach((c) =>
@@ -472,17 +561,15 @@
           br.style.left = right + "px";
           br.style.top = bottom + "px";
 
-          /* badge gap */
           dragTag.style.left = rect.right - cont.left + 32 + "px";
           dragTag.style.top = rect.bottom - cont.top + 32 + "px";
         }
 
-        /* keep corners glued on any layout change */
         window.addEventListener("resize", updateCorners);
         window.addEventListener("scroll", updateCorners);
         new ResizeObserver(updateCorners).observe(heroCard);
 
-        /* ─── nav colour on scroll ─── */
+        // ─── Nav Color on Scroll ───
         function updateNavColour() {
           const scrollY = window.scrollY + nav.offsetHeight + 1;
           let active = null;
@@ -511,80 +598,68 @@
         window.addEventListener("resize", updateNavColour);
         updateNavColour();
 
-        /* ─── hero card initial layout ─── */
+        // ─── Hero Card Setup ───
         const w = 640,
-          h = 248,
-          startYvh = -12;
+          h = 248;
         heroCard.style.width = w + "px";
         heroCard.style.height = h + "px";
         heroCard.style.left = `calc(50% - ${w / 2}px)`;
-        heroCard.style.top = `calc(${startYvh}vh - ${h / 2}px)`;
+        heroCard.style.top = `calc(-4vh - ${h / 2}px)`;
         heroCard.style.padding = "2.5rem 3rem";
         heroCard.style.transformOrigin = "top left";
-        heroCard.style.transform = "scale(0)";
+        heroCard.style.transform = "scale(1)";
         updateCorners();
 
-        /* ─── STEP 1  • welcome bubble ─── */
-        dragTag.classList.add("nudge");
-        const hi = document.createElement("div");
-        hi.textContent = "Welcome to my portfolio :)";
-        Object.assign(hi.style, {
-          position: "absolute",
-          left: "calc(100% + 10px)",
-          top: 2.8,
-          color: "#1e90ff",
-          fontWeight: "bold",
-          whiteSpace: "nowrap",
-          opacity: 0,
-          transition: "opacity .5s",
+        // ─── Show sizeLabel text immediately ───
+        sizeLabel.style.opacity = 1;
+
+        // ─── Typing Text Content ───
+        const typeText =
+          "Haruto is a human-centered designer who brings clarity to complex systems through empathy and structure, with a background in Human-Computer Interaction from DePaul.";
+
+        // ─── Create and Display Paragraph ───
+        const p = document.createElement("p");
+        p.textContent = typeText;
+        Object.assign(p.style, {
+          margin: 0,
+          fontSize: "1.6rem",
+          lineHeight: "1.55",
+          cursor: "pointer",
         });
-        dragTag.appendChild(hi);
-        requestAnimationFrame(() => (hi.style.opacity = 1));
+        p.classList.add("typing-hover"); // blinking cursor on hover
+        heroCard.prepend(p);
 
-        /* ─── STEP 2  • fade bubble + grow card ─── */
-        setTimeout(() => {
-          hi.style.opacity = 0;
-          setTimeout(() => {
-            dragTag.removeChild(hi);
-            dragTag.style.animationPlayState = "paused";
+        // ─── Enable nudge animation on tag ───
+        dragTag.classList.add("nudge");
 
-            const growDuration = 800,
-              start = performance.now();
-            (function grow(now) {
-              const t = Math.min((now - start) / growDuration, 1);
-              heroCard.style.transform = `scale(${t * (2 - t)})`;
-              updateCorners();
-              t < 1 ? requestAnimationFrame(grow) : typeIt();
-            })(start);
-          }, 350);
-        }, 1200);
-
-        /* ─── STEP 3  • type sentence ─── */
+        // ─── Typing Animation ───
         function typeIt() {
-          const copy =
-            "Haruto is a human-centered designer who brings clarity to complex systems through empathy and structure, with a background in Human-Computer Interaction from DePaul.";
-          const p = document.createElement("p");
-          Object.assign(p.style, {
-            margin: 0,
-            fontSize: "1.6rem",
-            lineHeight: "1.55",
-          });
-          heroCard.prepend(p);
-
           let i = 0;
+          p.textContent = "";
+          sizeLabel.style.opacity = 0;
+
+          // Pause blinking bar and nudge
+          p.classList.remove("typing-hover");
+          dragTag.style.animationPlayState = "paused";
+
           const typer = setInterval(() => {
-            p.textContent += copy[i++];
+            p.textContent += typeText[i++];
             updateCorners();
-            if (i === copy.length) {
+            if (i === typeText.length) {
               clearInterval(typer);
               sizeLabel.style.transition = "opacity .4s";
               sizeLabel.style.opacity = 1;
+
+              // Resume nudge and blinking
               dragTag.style.animationPlayState = "running";
+              p.classList.add("typing-hover");
             }
           }, 30);
         }
 
-        /* ─── fade-ups on scroll ─── */
+        p.addEventListener("click", typeIt);
+
+        // ─── Fade-up Animations ───
         const io = new IntersectionObserver(
           (entries) => {
             entries.forEach((e) =>
