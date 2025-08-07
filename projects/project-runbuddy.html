@@ -99,11 +99,16 @@
         }
       }
 
+      .feature-media {
+        max-width: 100%;
+        height: auto;
+        max-height: 640px; /* larger than before for desktop */
+        border-radius: 8px;
+      }
+
       @media (max-width: 768px) {
         .feature-media {
-          max-width: 95%;
-          max-height: 440px;
-          margin: 0 auto;
+          max-height: 300px; /* also a bit bigger on mobile */
         }
       }
     </style>
@@ -803,50 +808,48 @@
                   as well.
                 </p>
 
-                <div
-                  class="d-flex justify-content-center align-items-stretch flex-wrap gap-4 mt-5 text-center"
-                >
-                  <!-- Pre-run -->
-                  <div
-                    class="card pre-run p-4 flex-fill"
-                    style="min-width: 220px"
-                  >
-                    <div class="fs-3 mb-2">🕒</div>
-                    <h4>
-                      Pre-run <span class="badge bg-secondary">MVP Focus</span>
-                    </h4>
-                    <ul class="text-start">
-                      <li>Unclear expectations</li>
-                      <li>Uncertainty about group fit</li>
-                      <li>Social anxiety and worry</li>
-                    </ul>
-                  </div>
+                <div class="container mt-5">
+                  <div class="row text-center g-4">
+                    <!-- Pre-run -->
+                    <div class="col-12 col-md-4">
+                      <div class="card pre-run p-4 h-100">
+                        <div class="fs-3 mb-2">🕒</div>
+                        <h4>
+                          Pre-run
+                          <span class="badge bg-secondary">MVP Focus</span>
+                        </h4>
+                        <ul class="text-start">
+                          <li>Unclear expectations</li>
+                          <li>Uncertainty about group fit</li>
+                          <li>Social anxiety and worry</li>
+                        </ul>
+                      </div>
+                    </div>
 
-                  <!-- Arrow -->
-                  <div class="d-flex align-items-center fs-2 text-muted">→</div>
+                    <!-- During-run -->
+                    <div class="col-12 col-md-4">
+                      <div class="card p-4 h-100">
+                        <div class="fs-2 mb-2">🏃</div>
+                        <h4>During-run</h4>
+                        <ul class="text-start">
+                          <li>Mismatch in running pace</li>
+                          <li>Loss of confidence</li>
+                          <li>Feeling out of place</li>
+                        </ul>
+                      </div>
+                    </div>
 
-                  <!-- During-run -->
-                  <div class="card p-4 flex-fill" style="min-width: 220px">
-                    <div class="fs-2 mb-2">🏃</div>
-                    <h4>During-run</h4>
-                    <ul class="text-start">
-                      <li>Mismatch in running pace</li>
-                      <li>Loss of confidence</li>
-                      <li>Feeling out of place</li>
-                    </ul>
-                  </div>
-
-                  <!-- Arrow -->
-                  <div class="d-flex align-items-center fs-2 text-muted">→</div>
-
-                  <!-- Post-run -->
-                  <div class="card p-4 flex-fill" style="min-width: 220px">
-                    <div class="fs-3 mb-2">💬</div>
-                    <h4>Post-run</h4>
-                    <ul class="text-start">
-                      <li>Lack of social interaction</li>
-                      <li>Awkwardness after the run</li>
-                    </ul>
+                    <!-- Post-run -->
+                    <div class="col-12 col-md-4">
+                      <div class="card p-4 h-100">
+                        <div class="fs-3 mb-2">💬</div>
+                        <h4>Post-run</h4>
+                        <ul class="text-start">
+                          <li>Lack of social interaction</li>
+                          <li>Awkwardness after the run</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
