@@ -54,24 +54,40 @@
     </div>
     <nav class="navbar">
       <a href="../index.html" class="logo">HARUTO</a>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
       <ul class="nav-links">
-        <li><a href="../index.html">Work</a></li>
+        <li><a href="#runbuddy">Work</a></li>
         <li>
           <a
             href="https://drive.google.com/file/d/1kQiBoIlUGgwJgjnztmWiUEiN-4_9FTzR/view?usp=sharing"
-            rel="noopener noreferrer"
+            target="_blank"
             >Resume</a
           >
         </li>
         <li>
-          <a
-            href="https://www.linkedin.com/in/hrtmtsm/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <a href="https://www.linkedin.com/in/hrtmtsm/" target="_blank"
             >LinkedIn</a
           >
         </li>
       </ul>
+      <div class="menu-overlay"></div>
+      <div class="slide-down-menu">
+        <div class="menu-content">
+          <a href="#runbuddy">WORK</a>
+          <a
+            href="https://drive.google.com/file/d/1kQiBoIlUGgwJgjnztmWiUEiN-4_9FTzR/view?usp=sharing"
+            target="_blank"
+            >RESUME</a
+          >
+          <a href="https://www.linkedin.com/in/hrtmtsm/" target="_blank"
+            >LINKEDIN</a
+          >
+        </div>
+      </div>
     </nav>
     <!-- NEW: left sidebar scrollspy -->
     <div class="spy-sidebar d-none d-md-flex flex-column" id="sidebar-menu">
@@ -871,6 +887,40 @@
 
         // Call once on load
         updateButtonVisibility();
+      });
+    </script>
+    <script>
+      // ─── Hamburger Menu ───
+      const hamburger = document.querySelector(".hamburger");
+      const slideMenu = document.querySelector(".slide-down-menu");
+      const overlay = document.querySelector(".menu-overlay");
+
+      // ✅ Force-close the menu on load
+      hamburger.classList.remove("open");
+      slideMenu.classList.remove("show");
+      overlay.classList.remove("show");
+
+      // ✅ Toggle menu on hamburger click
+      hamburger.addEventListener("click", () => {
+        const isOpen = hamburger.classList.toggle("open");
+        slideMenu.classList.toggle("show", isOpen);
+        overlay.classList.toggle("show", isOpen);
+      });
+
+      // ✅ Close menu when any link inside menu is clicked
+      document.querySelectorAll(".slide-down-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("open");
+          slideMenu.classList.remove("show");
+          overlay.classList.remove("show");
+        });
+      });
+
+      // ✅ Close menu when clicking the transparent overlay
+      overlay.addEventListener("click", () => {
+        hamburger.classList.remove("open");
+        slideMenu.classList.remove("show");
+        overlay.classList.remove("show");
       });
     </script>
     <script>

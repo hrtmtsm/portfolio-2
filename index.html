@@ -59,8 +59,8 @@
       }
 
       #runbuddy {
-        margin-top: -184px;
-        padding-top: 128px;
+        margin-top: -11.5rem; /* -184px */
+        padding-top: 8rem; /* 128px */
         z-index: 1;
         position: relative;
       }
@@ -86,31 +86,34 @@
       /*───── Corners & Tags ─────*/
       .corner {
         position: absolute;
-        width: 10px;
-        height: 10px;
+        width: 0.625rem; /* 10px */
+        height: 0.625rem; /* 10px */
         background: #fff;
         border: 2px solid var(--accent);
         pointer-events: none;
         opacity: 0;
         transition: opacity 0.2s ease;
       }
+
       .corner.visible {
         opacity: 1;
       }
+
       #sizeLabel {
         position: absolute;
-        bottom: -40px;
+        bottom: -2.5rem; /* -40px */
         left: 50%;
         transform: translateX(-50%);
         background: var(--accent);
         color: #fff;
-        font-size: 0.75rem;
+        font-size: 0.75rem; /* 12px */
         font-weight: 600;
-        padding: 2px 8px;
-        border-radius: 4px;
+        padding: 0.125rem 0.5rem; /* 2px 8px */
+        border-radius: 0.25rem; /* 4px */
         white-space: nowrap;
         opacity: 0;
       }
+
       .haruto-tag {
         position: absolute;
         display: flex;
@@ -118,34 +121,38 @@
         pointer-events: none;
         z-index: 1000;
       }
+
       .haruto-box {
         background: var(--accent);
         color: #fff;
-        padding: 6px 12px;
+        padding: 0.375rem 0.75rem; /* 6px 12px */
         font-weight: 600;
-        font-size: 0.85rem;
-        border-radius: 3px;
+        font-size: 0.875rem; /* 14px */
+        border-radius: 0.1875rem; /* 3px */
         white-space: nowrap;
         position: relative;
       }
+
       .haruto-svg {
         position: absolute;
-        top: -20px;
-        left: -20px;
-        width: 16px;
-        height: 16px;
+        top: -1.25rem; /* -20px */
+        left: -1.25rem; /* -20px */
+        width: 1rem; /* 16px */
+        height: 1rem; /* 16px */
         transform: rotate(56deg);
         filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
       }
+
       @keyframes nudge {
         0%,
         100% {
-          transform: translate(-4px, -4px);
+          transform: translate(-0.25rem, -0.25rem); /* -4px, -4px */
         }
         50% {
-          transform: translate(4px, 4px);
+          transform: translate(0.25rem, 0.25rem); /* 4px, 4px */
         }
       }
+
       .nudge {
         animation: nudge 1.8s ease-in-out infinite;
       }
@@ -153,29 +160,33 @@
       /*───── Project Slide ─────*/
       .project-slide {
         min-height: 100vh;
-        padding: 4rem 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
       }
 
       .project-wrapper {
-        max-width: 1040px;
+        max-width: 65rem; /* 1040px */
         width: 100%;
         display: flex;
         flex-direction: column;
         gap: 3rem;
-        padding: 0 1.5rem;
+        padding: 0 4rem;
         margin: 0 auto;
       }
-      @media (min-width: 992px) {
+
+      @media (min-width: 62rem) {
+        /* 992px */
         .project-wrapper {
           flex-direction: row;
+          padding: 0 2.4rem;
         }
+
         .project-info {
           flex: 0 0 38%;
-          max-width: 420px;
+          max-width: 26.25rem; /* 420px */
         }
+
         .project-media-wrap {
           flex: 1;
         }
@@ -185,40 +196,46 @@
       .project-info {
         margin: 0;
       }
+
       .project-label {
         font-weight: 500;
-        font-size: 0.95rem;
+        font-size: 0.9375rem; /* 15px */
         opacity: 0.65;
         margin-bottom: 0.5rem;
       }
+
       .project-title {
-        font-size: 2rem;
+        font-size: 2rem; /* 32px */
         font-weight: 700;
         margin-bottom: 0.5rem;
       }
+
       .project-subtitle {
-        font-size: 1.05rem;
+        font-size: 1.0625rem; /* 17px */
         color: #444;
         font-weight: 500;
         margin-bottom: 1rem;
         line-height: 1.5;
       }
+
       .project-desc {
-        font-size: 1rem;
+        font-size: 1rem; /* 16px */
         margin-bottom: 1.5rem;
         opacity: 0.85;
       }
+
       .project-tags {
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
         margin-bottom: 1.5rem;
       }
+
       .project-tags span {
         background: rgba(0, 0, 0, 0.05);
-        padding: 6px 12px;
-        border-radius: 999px;
-        font-size: 0.85rem;
+        padding: 0.375rem 0.75rem; /* 6px 12px */
+        border-radius: 62.4375rem; /* 999px */
+        font-size: 0.875rem; /* 14px */
         font-weight: 500;
         opacity: 0.8;
       }
@@ -229,35 +246,39 @@
         border: none;
         color: inherit;
         font-weight: 500;
-        font-size: 1rem;
+        font-size: 1rem; /* 16px */
         text-decoration: none;
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 0.375rem; /* 6px */
         border-bottom: 1px solid transparent;
         transition: all 0.3s ease;
         padding: 0.2rem 0;
         position: relative;
       }
+
       .btn-case::after {
         content: "↗";
-        font-size: 0.95rem;
+        font-size: 0.9375rem; /* 15px */
         transition: transform 0.25s ease;
       }
+
       .btn-case:hover {
         border-bottom: 1px solid currentColor;
         transform: translateX(2px);
       }
+
       .btn-case:hover::after {
-        transform: translate(3px, -3px);
+        transform: translate(0.1875rem, -0.1875rem); /* 3px, -3px */
       }
+
       .cursor-type-mode {
         width: 2px;
-        height: 40px;
+        height: 2.75rem; /* 44px */
         background-color: #232323;
         opacity: 0.88;
         border-radius: 1px;
-        animation: blink-caret 1s step-end infinite;
+        animation: blink-caret 1.2s step-end infinite;
       }
 
       .cursor-type-mode .cursor-label {
@@ -274,7 +295,22 @@
           opacity: 0;
         }
       }
+
       @media (max-width: 576px) {
+        .small-video {
+          width: 80% !important;
+          max-width: 320px !important;
+          height: auto !important;
+          display: block !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          border-radius: 8px;
+        }
+      }
+
+      /* Mobile Responsive Adjustments */
+      @media (max-width: 36rem) {
+        /* 576px */
         #hero-bg {
           height: auto !important;
           padding-top: 3rem;
@@ -283,13 +319,14 @@
 
         #heroCard {
           position: relative !important;
-          width: 80vw !important;
+          width: 72vw !important;
           height: auto !important;
-          padding: 2rem 1.25rem !important;
+          padding: 2rem 1.6rem !important;
           left: auto !important;
-          top: auto !important;
+          top: 1rem !important;
           transform: none !important;
           margin: 0 auto;
+          font-size: 1.5rem; /* Slightly smaller on mobile */
         }
 
         .haruto-tag {
@@ -304,11 +341,48 @@
         .corner {
           display: block !important;
           opacity: 1 !important;
-          width: 10px;
-          height: 10px;
+          width: 0.625rem; /* 10px */
+          height: 0.625rem; /* 10px */
           background: #fff;
           border: 2px solid var(--accent);
           z-index: 10;
+        }
+
+        .project-title {
+          font-size: 1.75rem; /* Smaller title on mobile */
+        }
+
+        .project-subtitle {
+          font-size: 1rem; /* Adjust subtitle */
+        }
+
+        .project-wrapper {
+          padding: 0 1.5rem; /* Less padding on mobile */
+          gap: 2rem; /* Smaller gap */
+        }
+      }
+
+      /* Tablet adjustments */
+      @media (max-width: 48rem) and (min-width: 36rem) {
+        /* 768px to 576px */
+        .project-wrapper {
+          padding: 0 2rem;
+        }
+
+        #heroCard {
+          font-size: 1.6rem; /* Slightly smaller for tablets */
+        }
+      }
+
+      /* Large screen optimizations */
+      @media (min-width: 75rem) {
+        /* 1200px */
+        .project-wrapper {
+          max-width: 75rem; /* Allow more width on large screens */
+        }
+
+        #heroCard {
+          font-size: 2rem; /* Slightly larger on big screens */
         }
       }
     </style>
@@ -319,27 +393,47 @@
       <span class="cursor-label">↗</span>
     </div>
 
+    <!-- ✅ Navbar first, outside of hero-bg -->
+    <nav class="navbar">
+      <a href="#" class="logo">HARUTO</a>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#runbuddy">Work</a></li>
+        <li>
+          <a
+            href="https://drive.google.com/file/d/1kQiBoIlUGgwJgjnztmWiUEiN-4_9FTzR/view?usp=sharing"
+            target="_blank"
+            >Resume</a
+          >
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/hrtmtsm/" target="_blank"
+            >LinkedIn</a
+          >
+        </li>
+      </ul>
+      <div class="menu-overlay"></div>
+      <div class="slide-down-menu">
+        <div class="menu-content">
+          <a href="#runbuddy">WORK</a>
+          <a
+            href="https://drive.google.com/file/d/1kQiBoIlUGgwJgjnztmWiUEiN-4_9FTzR/view?usp=sharing"
+            target="_blank"
+            >RESUME</a
+          >
+          <a href="https://www.linkedin.com/in/hrtmtsm/" target="_blank"
+            >LINKEDIN</a
+          >
+        </div>
+      </div>
+    </nav>
+
     <!--──────── HERO ─────────-->
     <section id="hero-bg" data-navcolor="transparent">
-      <nav id="mainNav" class="navbar">
-        <a href="" class="logo">HARUTO</a>
-        <ul class="nav-links">
-          <li><a href="#runbuddy">Work</a></li>
-          <li>
-            <a
-              href="https://drive.google.com/file/d/1kQiBoIlUGgwJgjnztmWiUEiN-4_9FTzR/view?usp=sharing"
-              target="_blank"
-              >Resume</a
-            >
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/hrtmtsm/" target="_blank"
-              >LinkedIn</a
-            >
-          </li>
-        </ul>
-      </nav>
-
       <div class="hero-content px-3">
         <div id="heroCard">
           <div id="sizeLabel">Design = Empathy × Logistic</div>
@@ -569,35 +663,6 @@
         window.addEventListener("scroll", updateCorners);
         new ResizeObserver(updateCorners).observe(heroCard);
 
-        // ─── Nav Color on Scroll ───
-        function updateNavColour() {
-          const scrollY = window.scrollY + nav.offsetHeight + 1;
-          let active = null;
-          sections.forEach((sec) => {
-            if (
-              scrollY >= sec.offsetTop &&
-              scrollY < sec.offsetTop + sec.offsetHeight
-            )
-              active = sec;
-          });
-          if (!active) return;
-
-          const bg = active.dataset.navcolor || "transparent";
-          const text = tinycolor(bg).isValid()
-            ? tinycolor(bg).saturate(100).darken(45).toHexString()
-            : "#141414";
-
-          nav.style.backgroundColor = bg;
-          nav.style.color = text;
-          nav.querySelectorAll("a").forEach((a) => (a.style.color = text));
-          active
-            .querySelectorAll(".project-info, .btn-case")
-            .forEach((el) => (el.style.color = text));
-        }
-        window.addEventListener("scroll", updateNavColour);
-        window.addEventListener("resize", updateNavColour);
-        updateNavColour();
-
         // ─── Hero Card Setup ───
         const w = 640,
           h = 248;
@@ -658,6 +723,40 @@
         }
 
         p.addEventListener("click", typeIt);
+
+        // ─── Hamburger Menu ───
+        const hamburger = document.querySelector(".hamburger");
+        const slideMenu = document.querySelector(".slide-down-menu");
+        const overlay = document.querySelector(".menu-overlay");
+
+        // ✅ Force-close the menu on load
+        hamburger.classList.remove("open");
+        slideMenu.classList.remove("show");
+        overlay.classList.remove("show");
+
+        // ✅ Toggle menu on hamburger click
+        hamburger.addEventListener("click", () => {
+          const isOpen = hamburger.classList.toggle("open");
+          slideMenu.classList.toggle("show", isOpen);
+          overlay.classList.toggle("show", isOpen);
+        });
+
+        // ✅ Close menu when any link inside menu is clicked
+        document.querySelectorAll(".slide-down-menu a").forEach((link) => {
+          link.addEventListener("click", () => {
+            hamburger.classList.remove("open");
+            slideMenu.classList.remove("show");
+            overlay.classList.remove("show");
+          });
+        });
+
+        // ✅ Close menu when clicking the transparent overlay
+        overlay.addEventListener("click", () => {
+          hamburger.classList.remove("open");
+          slideMenu.classList.remove("show");
+          overlay.classList.remove("show");
+        });
+        s;
 
         // ─── Fade-up Animations ───
         const io = new IntersectionObserver(
