@@ -98,6 +98,14 @@
           right: 16px;
         }
       }
+
+      @media (max-width: 768px) {
+        .feature-media {
+          max-width: 95%;
+          max-height: 440px;
+          margin: 0 auto;
+        }
+      }
     </style>
   </head>
   <body
@@ -112,24 +120,40 @@
     </div>
     <nav class="navbar">
       <a href="../index.html" class="logo">HARUTO</a>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
       <ul class="nav-links">
-        <li><a href="../index.html">Work</a></li>
+        <li><a href="#runbuddy">Work</a></li>
         <li>
           <a
             href="https://drive.google.com/file/d/1kQiBoIlUGgwJgjnztmWiUEiN-4_9FTzR/view?usp=sharing"
-            rel="noopener noreferrer"
+            target="_blank"
             >Resume</a
           >
         </li>
         <li>
-          <a
-            href="https://www.linkedin.com/in/hrtmtsm/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <a href="https://www.linkedin.com/in/hrtmtsm/" target="_blank"
             >LinkedIn</a
           >
         </li>
       </ul>
+      <div class="menu-overlay"></div>
+      <div class="slide-down-menu">
+        <div class="menu-content">
+          <a href="#runbuddy">WORK</a>
+          <a
+            href="https://drive.google.com/file/d/1kQiBoIlUGgwJgjnztmWiUEiN-4_9FTzR/view?usp=sharing"
+            target="_blank"
+            >RESUME</a
+          >
+          <a href="https://www.linkedin.com/in/hrtmtsm/" target="_blank"
+            >LINKEDIN</a
+          >
+        </div>
+      </div>
     </nav>
     <!-- NEW: left sidebar scrollspy -->
     <div class="spy-sidebar d-none d-md-flex flex-column" id="sidebar-menu">
@@ -276,8 +300,7 @@
                       loop
                       muted
                       playsinline
-                      class="img-fluid"
-                      style="max-height: 640px"
+                      class="img-fluid feature-media"
                     >
                       <source
                         src="../images/runbuddy-feature-01.mp4"
@@ -288,16 +311,19 @@
                   </div>
                 </div>
               </section>
+
               <section class="container-lg py-5 fade-up">
                 <div class="row align-items-center">
-                  <div class="col-md-6 text-center mb-4 mb-md-0">
+                  <!-- Media: first on desktop, second on mobile -->
+                  <div
+                    class="col-md-6 text-center mb-4 mb-md-0 order-2 order-md-1"
+                  >
                     <video
                       autoplay
                       loop
                       muted
                       playsinline
-                      class="img-fluid"
-                      style="max-height: 640px"
+                      class="img-fluid feature-media"
                     >
                       <source
                         src="../images/runbuddy-feature-02.mp4"
@@ -305,7 +331,9 @@
                       />
                     </video>
                   </div>
-                  <div class="col-md-6 ps-md-5">
+
+                  <!-- Text: second on desktop, first on mobile -->
+                  <div class="col-md-6 ps-md-5 order-1 order-md-2">
                     <h5 class="text-muted mb-2">Feature 2</h5>
                     <h3 class="fw-semibold mb-3">Group Exploration</h3>
                     <p class="text-muted">
@@ -316,6 +344,7 @@
                   </div>
                 </div>
               </section>
+
               <section class="container-lg py-5 fade-up">
                 <div class="row align-items-center">
                   <div class="col-md-6 ps-md-5">
@@ -333,8 +362,7 @@
                       loop
                       muted
                       playsinline
-                      class="img-fluid"
-                      style="max-height: 640px"
+                      class="img-fluid feature-media"
                     >
                       <source
                         src="../images/runbuddy-feature-03.mp4"
@@ -344,6 +372,7 @@
                   </div>
                 </div>
               </section>
+
               <div class="container-lg">
                 <hr class="my-4" />
               </div>
@@ -1339,6 +1368,40 @@
 
         // ✅ Ensure correct visibility at load
         updatePersonaButtons();
+      });
+    </script>
+    <script>
+      // ─── Hamburger Menu ───
+      const hamburger = document.querySelector(".hamburger");
+      const slideMenu = document.querySelector(".slide-down-menu");
+      const overlay = document.querySelector(".menu-overlay");
+
+      // ✅ Force-close the menu on load
+      hamburger.classList.remove("open");
+      slideMenu.classList.remove("show");
+      overlay.classList.remove("show");
+
+      // ✅ Toggle menu on hamburger click
+      hamburger.addEventListener("click", () => {
+        const isOpen = hamburger.classList.toggle("open");
+        slideMenu.classList.toggle("show", isOpen);
+        overlay.classList.toggle("show", isOpen);
+      });
+
+      // ✅ Close menu when any link inside menu is clicked
+      document.querySelectorAll(".slide-down-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("open");
+          slideMenu.classList.remove("show");
+          overlay.classList.remove("show");
+        });
+      });
+
+      // ✅ Close menu when clicking the transparent overlay
+      overlay.addEventListener("click", () => {
+        hamburger.classList.remove("open");
+        slideMenu.classList.remove("show");
+        overlay.classList.remove("show");
       });
     </script>
 
