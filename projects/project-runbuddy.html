@@ -1374,40 +1374,85 @@
       });
     </script>
     <script>
-      // ─── Hamburger Menu ───
-      const hamburger = document.querySelector(".hamburger");
-      const slideMenu = document.querySelector(".slide-down-menu");
-      const overlay = document.querySelector(".menu-overlay");
+      (() => {
+        // ---- Elements
+        const navbar = document.querySelector(".navbar");
+        const hamburger = document.querySelector(".hamburger");
+        const slideMenu = document.querySelector(".slide-down-menu");
+        const overlay = document.querySelector(".menu-overlay");
 
-      // ✅ Force-close the menu on load
-      hamburger.classList.remove("open");
-      slideMenu.classList.remove("show");
-      overlay.classList.remove("show");
+        if (!navbar || !hamburger || !slideMenu || !overlay) return;
 
-      // ✅ Toggle menu on hamburger click
-      hamburger.addEventListener("click", () => {
-        const isOpen = hamburger.classList.toggle("open");
-        slideMenu.classList.toggle("show", isOpen);
-        overlay.classList.toggle("show", isOpen);
-      });
+        // ---- State helpers
+        const isMenuOpen = () => hamburger.classList.contains("open");
 
-      // ✅ Close menu when any link inside menu is clicked
-      document.querySelectorAll(".slide-down-menu a").forEach((link) => {
-        link.addEventListener("click", () => {
-          hamburger.classList.remove("open");
-          slideMenu.classList.remove("show");
-          overlay.classList.remove("show");
-        });
-      });
+        const setMenuState = (open) => {
+          hamburger.classList.toggle("open", open);
+          slideMenu.classList.toggle("show", open);
+          overlay.classList.toggle("show", open);
+          navbar.classList.toggle("menu-open", open); // keep navbar pinned when menu open
+          if (open) navbar.classList.remove("nav-hidden");
+        };
 
-      // ✅ Close menu when clicking the transparent overlay
-      overlay.addEventListener("click", () => {
-        hamburger.classList.remove("open");
-        slideMenu.classList.remove("show");
-        overlay.classList.remove("show");
-      });
+        // Init
+        setMenuState(false);
+
+        // ---- Toggle menu (single source of truth)
+        hamburger.addEventListener("click", () => setMenuState(!isMenuOpen()));
+        overlay.addEventListener("click", () => setMenuState(false));
+        slideMenu
+          .querySelectorAll("a")
+          .forEach((a) =>
+            a.addEventListener("click", () => setMenuState(false))
+          );
+
+        // ---- Fade-up (unchanged)
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) =>
+              e.target.classList.toggle("visible", e.isIntersecting)
+            ),
+          { threshold: 0.3 }
+        );
+        document.querySelectorAll(".fade-up").forEach((el) => io.observe(el));
+
+        // ---- Hide navbar on scroll down, show on scroll up
+        let lastY = window.pageYOffset;
+        let ticking = false;
+        const THRESHOLD = 8;
+        const TOP_PIN = 40;
+
+        const onScroll = () => {
+          const y = window.pageYOffset || document.documentElement.scrollTop;
+          const delta = y - lastY;
+
+          if (Math.abs(delta) >= THRESHOLD) {
+            if (!isMenuOpen()) {
+              if (y > lastY && y > TOP_PIN) {
+                navbar.classList.add("nav-hidden"); // down
+              } else {
+                navbar.classList.remove("nav-hidden"); // up
+              }
+            } else {
+              navbar.classList.remove("nav-hidden"); // keep visible when menu open
+            }
+            lastY = Math.max(0, y);
+          }
+          ticking = false;
+        };
+
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (!ticking) {
+              requestAnimationFrame(onScroll);
+              ticking = true;
+            }
+          },
+          { passive: true }
+        );
+      })();
     </script>
-
     <!-- ✅ Intersection Observer Fade Up -->
     <script>
       const scrollSections = document.querySelectorAll(".fade-up");
