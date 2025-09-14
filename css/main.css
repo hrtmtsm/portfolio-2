@@ -5,6 +5,12 @@
   box-sizing: border-box;
 }
 
+:root{
+  --side-pad-desktop: 9rem;   /* matches .content-wrapper */
+  --side-pad-tablet: 1.5rem;  /* 24px */
+}
+
+
 body {
   font-family: 'Inter', sans-serif;
   font-weight: 300;
@@ -196,11 +202,41 @@ a:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.6rem 4rem;
-  background: rgba(255, 255, 255, 0.75);
+  /* padding: 1.6rem 4rem; */
+  padding: 1.6rem var(--side-pad-desktop);
+  
   color: #141414;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  
 }
+
+/* hide/reveal state */
+.navbar.nav-hidden{
+  transform: translateY(-100%);
+}
+
+/* tablet & below: share the same gutters as content */
+@media (max-width: 64rem){
+  .navbar{ padding: 1.6rem var(--side-pad-tablet); }
+}
+
+.content-wrapper{
+  margin-top: 6rem;
+  padding-left: var(--side-pad-desktop);
+  padding-right: var(--side-pad-desktop);
+}
+@media (max-width: 64rem){
+  .content-wrapper{
+    padding-left: var(--side-pad-tablet);
+    padding-right: var(--side-pad-tablet);
+  }
+}
+
+/* (optional) when slide-down menu is open, pin navbar (don’t slide) */
+.navbar.menu-open{
+  transform: none !important;
+}
+
 
 /* Glassy white navbar on tablet & mobile */
 @media (max-width: 64rem) { /* 1024px */
